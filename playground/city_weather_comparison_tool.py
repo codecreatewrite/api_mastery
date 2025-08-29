@@ -18,7 +18,7 @@ with open(".secrets.json", newline="") as f:
   API_KEY = json.load(f)['data']['open_weather_api']
 
 #Defaults
-#API_KEY = "d58f89640bb0ec79a0a3b5bd2ecd8d7d"
+#API_KEY = ""
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
 #Function
