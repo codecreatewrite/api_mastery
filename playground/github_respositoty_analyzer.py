@@ -5,27 +5,29 @@ Created: 2025-09-03T17:57:47+01:00
 Project: api_mastery
 Template: script
 """
-import os
-import sys
-import json
-import time
-from typing import Any, Dict
+import requests
 
-try:
-    import requests  # pip install requests
-except Exception as e:
-    print("[setup] Missing dependency: requests — pip install requests", file=sys.stderr)
-    raise
+# Your challenge template
+class GitHubAnalyzer:
+  def __init__(self):
+    # Initialize with robust API client
+    pass
 
-BASE_URL = os.getenv("BASE_URL", "https://httpbin.org")
-API_KEY = os.getenv("API_KEY", "")
-DEFAULT_HEADERS = {"User-Agent": "api-mastery/lesson", **({"Authorization": f"Bearer {API_KEY}"} if API_KEY else {})}
+  def get_repo_info(self, owner, repo):
+    # Get repository data from GitHub API
+    # URL: https://api.github.com/repos/{owner}/{repo}
+    pass
 
-def get_json(path: str, params: Dict[str, Any] | None = None) -> Dict[str, Any]:
-    url = f"{BASE_URL.rstrip('/')}/{path.lstrip('/')}"
-    r = requests.get(url, headers=DEFAULT_HEADERS, params=params, timeout=30)
-    r.raise_for_status()
-    return r.json()
+  def compare_repos(self, repo_list):
+    # Compare multiple repositories
+    # Show stars, forks, language, last update
+    pass
 
-if __name__ == "__main__":
-    print("GET /get →", json.dumps(get_json("get", {"hello": "world"}), indent=2))
+# Test with popular repos
+analyzer = GitHubAnalyzer()
+repos = [
+    "microsoft/vscode",
+    "facebook/react",
+    "tensorflow/tensorflow"
+]
+analyzer.compare_repos(repos)
