@@ -147,32 +147,32 @@ class RobustAPIClient:
     def delete(self, endpoint, **kwargs):
         return self._make_request('DELETE', endpoint, **kwargs)
 
+if __name__ == '__main__':
+    client = RobustAPIClient("https://jsonplaceholder.typicode.com/")
 
-client = RobustAPIClient("https://jsonplaceholder.typicode.com/")
+    # 1) GET an existing resource (server returns 200 with JSON body)
+    result = client.get("posts/1")
+    print(result)
 
-# 1) GET an existing resource (server returns 200 with JSON body)
-result = client.get("posts/1")
-print(result)
+    # 2) GET a non-existent resource (server returns 404)
+    result = client.get("posts/999999")
+    print(result)
 
-# 2) GET a non-existent resource (server returns 404)
-result = client.get("posts/999999")
-print(result)
+    # 3) POST that created resource (server returns 201 + JSON)
+    payload = {'title': 'hello', 'body': 'x', 'userId': 1}
+    result = client.post("posts", json=payload)
+    print(result)
 
-# 3) POST that created resource (server returns 201 + JSON)
-payload = {'title': 'hello', 'body': 'x', 'userId': 1}
-result = client.post("posts", json=payload)
-print(result)
+    # 4) DELETE (server may return 200 or 204 depending on API)
+    result = client.delete("posts/1")
+    print(result)
 
-# 4) DELETE (server may return 200 or 204 depending on API)
-result = client.delete("posts/1")
-print(result)
+    # 5) Server says "Too Many Requests" with Retry-After header
+    # Suppose server returns status 429 and header Retry-After: "120"
+    result = client.get("rate_limited_endpoint")
+    print(result)
 
-# 5) Server says "Too Many Requests" with Retry-After header
-# Suppose server returns status 429 and header Retry-After: "120"
-result = client.get("rate_limited_endpoint")
-print(result)
-
-# 6) Server returns 500
-result = client.get("internal_error")
-print(result)
+    # 6) Server returns 500
+    result = client.get("internal_error")
+    print(result)
 
