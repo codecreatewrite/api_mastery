@@ -6,12 +6,13 @@ Project: api_mastery
 Template: script
 """
 import requests
+from robustapiclient import RobustAPIClient
 
 # Your challenge template
 class GitHubAnalyzer:
   def __init__(self):
     # Initialize with robust API client
-    pass
+    self.github_api_client = RobustAPIClient("https://api.github.com")
 
   def get_repo_info(self, owner, repo):
     # Get repository data from GitHub API
