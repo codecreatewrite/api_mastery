@@ -17,7 +17,7 @@ class GitHubAnalyzer:
 
   def get_repo_info(self, owner, repo):
     # Get repository data from GitHub API
-    # URL: https://api.github.com/repos/{owner}/{repo}
+    # URL: https://api.github.com/repos/{owner}/ rep}
     url = f"repos/{owner}/{repo}"
     repo_data = self.github_client.get(url)
     return repo_data
@@ -27,12 +27,13 @@ class GitHubAnalyzer:
     # Show stars, forks, language, last update
     results = {}
 
-    for repo in repo_list:
-      data = get_repo_info(owner, repo)
-      results[repo] = data
+    for rep in repo_list:
+      owner, repo = rep.strip('/').split('/')
+      data = self.get_repo_info(owner, repo)
+      results[rep] = data
 
-    for repo, data in results.items():
-      print(f"{repo.title():15}")
+    for rep, data in results.items():
+      print(f"{rep.title():15} | {data['data']['allow_forking']:10} | {data['data']['forks']:10} | {data['data']['language']:10} | {data['data']['stargazers_count']:10} | {data['data']['updated_at']:10}")
 
 # Test with popular repos
 analyzer = GitHubAnalyzer()
