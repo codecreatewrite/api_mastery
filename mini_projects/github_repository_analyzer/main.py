@@ -35,7 +35,7 @@ class GitHubAnalyzer:
           raw = results['data']
 
           repo_data = {
-            'name': raw[].get('name'),
+            'name': raw.get('full_name'),
             'stars': raw.get('stargazers_count'),
             'forks': raw.get('forks_count'),
             'language': raw.get('language'),
@@ -60,7 +60,7 @@ class GitHubAnalyzer:
     if data_list:
       print(f"{'Fullname':>25} | {'Stars':>15} | {'Forks':>15} | {'Language':>15} | {'Last update':10}")
       for r_d in data_list:
-        print(f"{str(r_d.get('fullname') or 'N/A'):25} | {str(r_d.get('stars') or 'N/A'):15} | {str(r_d.get('forks') or 'N/A'):15} | {str(r_d.get('language') or 'N/A'):15} | {str(r_d.get('last_update') or 'N/A')}")
+        print(f"{str(r_d.get('full_name') or 'N/A'):25} | {str(r_d.get('stars') or 'N/A'):15} | {str(r_d.get('forks') or 'N/A'):15} | {str(r_d.get('language') or 'N/A'):15} | {str(r_d.get('last_update') or 'N/A')}")
         print()
     else:
       print("No data to display")
