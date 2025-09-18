@@ -1,5 +1,12 @@
+# 1. Manage credentials for multiple APIs securely
+# 2. Handle different authentication methods
+# 3. Implement intelligent rate limiting
+# 4. Provide a unified interface for GitHub, Weather, and News APIs
+# 5. Show quota usage and limits for each service
+
 import requests
-import time
+from api_mastery.clients.github_api_client import GitHubAPIClient
+from api_mastery.clients.secure_credential_manager import SecureCredentialManager
 
 # Your challenge template
 class MultiServiceDashboard:
@@ -13,7 +20,10 @@ class MultiServiceDashboard:
 
     def setup_all_services(self):
         # Initialize all API clients with different auth methods
-        pass
+        #Github
+        self.github = GitHubAPIClient()
+        #Weather
+        #News
 
     def get_unified_dashboard(self):
         # Create dashboard showing data from all services
